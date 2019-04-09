@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  test:
+    build:
+      context: iperf3
+      dockerfile: Dockerfile
+    container_name: "iperf3"
+    ports:
+      - "50001:5001/tcp"
+      - "50001:5001/udp"
+    networks:
+      - public 
+      - private 
+    dns_search: .
+    command: iperf3 -s -V -d -p 5001            
+
+networks:
+  public:
+    driver: bridge
+  private:
+    driver: bridge
